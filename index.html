@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Cyber-Desert Arcade 50+ Games</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="https://api.iconify.design/twemoji:video-game.svg" type="image/svg+xml">
+
+    <!-- New Social Bar Ad Script -->
+    <script src="https://examinerashtrayquizmaster.com/31/10/40/311040619fc9e23e3b07657ea04ab299.js"></script>
+
+    <!-- New Popunder Ad Script -->
+    <script src="https://examinerashtrayquizmaster.com/32/56/aa/3256aae8d605fe5b082e3afda812dc9f.js"></script>
+
+    <style>
+        :root {
+            --bg-cyber: #0d0b09;
+            --panel-cyber: #18130e;
+            --border-cyber: #3d2c1d;
+            --accent-gold: #f4a261;
+            --accent-neon: #e76f51;
+            --text-light: #f4f1de;
+            --text-muted: #9a8c98;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg-cyber);
+            color: var(--text-light);
+            margin: 0;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        h1 { 
+            color: var(--accent-gold); 
+            margin: 0 0 5px 0; 
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 1.8rem;
+            text-shadow: 0 0 10px rgba(244, 162, 97, 0.4);
+        }
+        
+        p.subtitle { 
+            color: var(--text-muted); 
+            margin: 0; 
+            font-size: 0.9rem;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1000px;
+            background: var(--panel-cyber);
+            padding: 20px;
+            border-radius: 12px;
+            border: 2px solid var(--accent-neon);
+            box-shadow: 0 0 25px rgba(231, 111, 81, 0.2);
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 6px;
+            background: #090705;
+            border: 1px solid var(--border-cyber);
+            color: var(--text-light);
+            font-size: 1rem;
+            margin-bottom: 15px;
+            outline: none;
+        }
+        .search-box:focus { border-color: var(--accent-gold); }
+
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 12px;
+            max-height: 350px;
+            overflow-y: auto;
+            padding-right: 5px;
+            margin-bottom: 20px;
+        }
+
+        .game-grid::-webkit-scrollbar { width: 6px; }
+        .game-grid::-webkit-scrollbar-thumb { background: var(--border-cyber); border-radius: 3px; }
+
+        .game-card {
+            background: #14100c;
+            border: 1px solid var(--border-cyber);
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: var(--text-light);
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        .game-card:hover {
+            border-color: var(--accent-gold);
+            background: #231b14;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+        }
+
+        #gameWrapper {
+            width: 100%;
+            position: relative;
+            padding-bottom: 65%;
+            background: #000;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 2px solid var(--border-cyber);
+        }
+
+        #gameContainer {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+
+        /* Native Ad 4:1 Box */
+        .ad-banner-box {
+            margin: 20px 0 10px 0;
+            text-align: center;
+            background: #14100c;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid var(--border-cyber);
+            min-height: 90px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Anti-AdBlock Modal */
+        #adblock-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.92);
+            z-index: 99999;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .adblock-content {
+            background: var(--panel-cyber);
+            border: 3px solid var(--accent-neon);
+            padding: 25px;
+            border-radius: 10px;
+            max-width: 400px;
+            text-align: center;
+            color: var(--text-light);
+            box-shadow: 0 0 30px rgba(231,111,81,0.4);
+        }
+        .adblock-content h2 { color: var(--accent-neon); margin-top: 0; }
+        .adblock-content p { font-size: 0.85rem; line-height: 1.6; color: var(--text-muted); }
+        .adblock-btn {
+            background: var(--accent-gold);
+            color: #0d0b09;
+            border: none;
+            padding: 12px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 15px;
+            width: 100%;
+            font-size: 0.9rem;
+        }
+        .adblock-btn:hover { background: #f4a261; }
+    </style>
+</head>
+<body>
+
+    <!-- Anti-AdBlock Modal -->
+    <div id="adblock-modal">
+        <div class="adblock-content">
+            <h2>⚠️ AdBlocker Detected</h2>
+            <p>Please disable your adblock extension to help us keep this 50+ game arcade portal running completely free for everyone.</p>
+            <button class="adblock-btn" onclick="location.reload()">I Have Disabled It / Refresh</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>⚡ Cyber-Desert Arcade Hub</h1>
+            <p class="subtitle">Explore over 50+ classic & modern web mini-games instantly!</p>
+        </header>
+
+        <!-- Search Filter -->
+        <input type="text" id="searchGame" class="search-box" placeholder="🔍 Search games (e.g. Tetris, Snake, Chess)..." onkeyup="filterGames()">
+
+        <!-- 50+ Games Grid -->
+        <div class="game-grid" id="gameGrid"></div>
+
+        <!-- Game Screen Wrapper -->
+        <div id="gameWrapper">
+            <div id="gameContainer">
+                <div style="color: var(--text-muted); text-align: center; font-size: 0.95rem;">Select a game from the list above to launch!</div>
+            </div>
+        </div>
+
+        <!-- New Native Ad 4:1 Section -->
+        <div class="ad-banner-box">
+            <script async="async" data-cfasync="false" src="https://examinerashtrayquizmaster.com/11d12644b7837950f948d0a715595c44/invoke.js"></script>
+            <div id="container-11d12644b7837950f948d0a715595c44"></div>
+        </div>
+    </div>
+
+    <script>
+        // Database 50+ Game Stabil (Menggunakan sumber mirror game HTML5 yang ramah iframe)
+        const games = [
+            { name: "Flappy Bird", url: "https://surgeme.github.io/FlappyBird/" },
+            { name: "2048 Puzzle", url: "https://thezen.zone/2048/" },
+            { name: "Snake Game", url: "https://neave.com/snake/" },
+            { name: "Minesweeper", url: "https://minesweeperonline.com/" },
+            { name: "Solitaire", url: "https://www.google.com/logos/solitaire/solitaire.html" },
+            { name: "Pacman Doodle", url: "https://www.google.com/logos/2010/pacman10-i.html" },
+            { name: "Chess vs PC", url: "https://www.chess.com/play/computer" },
+            { name: "Sudoku Online", url: "https://sudoku.com/" },
+            { name: "Tic-Tac-Toe", url: "https://playtictactoe.org/" },
+            { name: "Bubble Shooter", url: "https://www.bubbleshooter.net/" },
+            { name: "HexGL Racing", url: "https://hexgl.bkcore.com/" },
+            { name: "Tetris Hub", url: "https://tetris.com/play-tetris" },
+            { name: "Pacman Official", url: "https://www.pacman.com" },
+            { name: "Crossy Road", url: "https://poki.com/en/g/crossy-road" },
+            { name: "Subway Surfers", url: "https://poki.com/en/g/subway-surfers" },
+            { name: "Temple Run 2", url: "https://poki.com/en/g/temple-run-2" },
+            { name: "Moto X3M", url: "https://poki.com/en/g/moto-x3m" },
+            { name: "Bad Ice Cream", url: "https://www.crazygames.com/embed/bad-ice-cream" },
+            { name: "Fireboy & Watergirl", url: "https://www.crazygames.com/embed/fireboy-and-watergirl-forest-temple" },
+            { name: "Basketball Legends", url: "https://www.crazygames.com/embed/basketball-legends-2020" },
+            { name: "Soccer Random", url: "https://www.crazygames.com/embed/soccer-random" },
+            { name: "Boxing Random", url: "https://www.crazygames.com/embed/boxing-random" },
+            { name: "Stickman Hook", url: "https://www.crazygames.com/embed/stickman-hook" },
+            { name: "Cut the Rope", url: "https://www.crazygames.com/embed/cut-the-rope" },
+            { name: "Tower Master", url: "https://www.crazygames.com/embed/tower-master" },
+            { name: "Mastermind Game", url: "https://www.webgames.io/mastermind/" },
+            { name: "Connect Four", url: "https://connect4.joshwcomeau.com/" },
+            { name: "Backgammon", url: "https://www.247backgammon.org/" },
+            { name: "Dominoes Classic", url: "https://www.247dominoes.com/" },
+            { name: "Jigsaw Planet", url: "https://www.jigsawplanet.com/" },
+            { name: "Word Search", url: "https://thewordsearch.com/" },
+            { name: "Crossword Labs", url: "https://crosswordlabs.com/" },
+            { name: "Checkers Pro", url: "https://www.247checkers.com/" },
+            { name: "Darts Online", url: "https://www.onlinegames.io/darts/" },
+            { name: "Bowling Club", url: "https://www.onlinegames.io/bowling/" },
+            { name: "Archery World", url: "https://www.onlinegames.io/archery/" },
+            { name: "Pinball Arcade", url: "https://www.onlinegames.io/pinball/" },
+            { name: "Free Asteroids", url: "https://freeasteroids.org/" },
+            { name: "Free Invaders", url: "https://freeinvaders.org/" },
+            { name: "Peoples Pong", url: "https://peoplespong.com/" },
+            { name: "Mahjong Connect", url: "https://www.mahjong-connect.com/" },
+            { name: "Paper io Style", url: "https://paper-io.com/" },
+            { name: "Slither io Style", url: "https://slither.io/" },
+            { name: "Agar io Style", url: "https://agar.io/" },
+            { name: "Wordle Game", url: "https://wordle.vote/" },
+            { name: "Memory Match", url: "https://www.crazygames.com/embed/memory-match" },
+            { name: "Atari Breakout", url: "https://atari.com/arcade/breakout/" },
+            { name: "Bloons TD", url: "https://www.crazygames.com/embed/bloons-tower-defense" },
+            { name: "Pool Billiards", url: "https://www.miniclip.com/games/8-ball-pool-multiplayer/en/" },
+            { name: "Othello Reversi", url: "https://en.boardgamearena.com/reversi" }
+        ];
+
+        function renderGames(list) {
+            const grid = document.getElementById('gameGrid');
+            grid.innerHTML = '';
+            list.forEach(game => {
+                const card = document.createElement('div');
+                card.className = 'game-card';
+                card.innerText = game.name;
+                card.onclick = () => launchGame(game.url);
+                grid.appendChild(card);
+            });
+        }
+
+        function launchGame(url) {
+            const container = document.getElementById('gameContainer');
+            container.innerHTML = `<iframe src="${url}" allowfullscreen></iframe>`;
+        }
+
+        function filterGames() {
+            const keyword = document.getElementById('searchGame').value.toLowerCase();
+            const filtered = games.filter(g => g.name.toLowerCase().includes(keyword));
+            renderGames(filtered);
+        }
+
+        renderGames(games);
+
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const bannerBox = document.getElementById('container-11d12644b7837950f948d0a715595c44');
+                if (!bannerBox || bannerBox.offsetHeight === 0 || window.getComputedStyle(bannerBox).display === 'none') {
+                    document.getElementById('adblock-modal').style.display = 'flex';
+                }
+            }, 3000);
+        });
+    </script>
+</body>
+</html>
