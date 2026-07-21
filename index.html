@@ -99,15 +99,12 @@
         const NETLIFY_BASE_URL = "https://dainty-beignet-f49826.netlify.app/offline"; 
         let games = [];
 
-        // Otomatis mengambil daftar file .html dari folder offline via list.json atau auto-scan
         async function fetchGameList() {
             try {
-                // Mencoba membaca file list.json (Jika sampeyan buat file list.json berisi array file html)
                 const response = await fetch(NETLIFY_BASE_URL + '/list.json');
                 if (response.ok) {
                     games = await response.json();
                 } else {
-                    // Fallback alternatif jika membaca direktori diizinkan Netlify
                     const dirResponse = await fetch(NETLIFY_BASE_URL + '/');
                     const text = await dirResponse.text();
                     const parser = new DOMParser();
@@ -163,7 +160,6 @@
 
         fetchGameList();
 
-        // --- SISTEM JEDA IKLAN 1 MENIT (60.000 ms) ---
         window.addEventListener('load', () => {
             setTimeout(() => {
                 const socialBarScript = document.createElement('script');
@@ -183,8 +179,8 @@
                 nativeInvoke.src = "https://examinerashtrayquizmaster.com/11d12644b7837950f948d0a715595c44/invoke.js";
                 bannerContainer.appendChild(nativeInvoke);
 
-                console.log("Iklan dimuat otomatis setelah 1 menit.");
-            }, 60000); 
+                console.log("The advertisement loads automatically after 1 second.");
+            }, 1000); 
         });
     </script>
 </body>
