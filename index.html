@@ -52,6 +52,9 @@
             border-radius: 8px; padding: 12px; text-align: center; cursor: pointer;
             transition: all 0.2s ease; color: var(--text-light); font-weight: 600; font-size: 0.85rem;
             text-transform: capitalize;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
         .game-card:hover { border-color: var(--accent-gold); background: #231b14; transform: translateY(-3px); }
         #gameWrapper {
@@ -75,10 +78,10 @@
             <p class="subtitle">Cloud-Powered Retro & Modern HTML5 Games</p>
         </header>
 
-        <input type="text" id="searchGame" class="search-box" placeholder="🔍 Scanning offline folder..." onkeyup="filterGames()" disabled>
+        <input type="text" id="searchGame" class="search-box" placeholder="🔍 Scanning game files..." onkeyup="filterGames()" disabled>
 
         <div class="game-grid" id="gameGrid">
-            <div style="grid-column: 1/-1; text-align: center; color: var(--accent-gold);">Loading games from offline directory...</div>
+            <div style="grid-column: 1/-1; text-align: center; color: var(--accent-gold);">Loading games list...</div>
         </div>
 
         <div id="gameWrapper">
@@ -96,34 +99,41 @@
         const NETLIFY_BASE_URL = "https://dainty-beignet-f49826.netlify.app/offline"; 
         let games = [];
 
-        // Auto-detect game dari folder offline di Netlify
+        // Otomatis mengambil daftar file .html dari folder offline via list.json atau auto-scan
         async function fetchGameList() {
             try {
-                const response = await fetch(NETLIFY_BASE_URL + '/');
-                const text = await response.text();
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(text, 'text/html');
-                const links = doc.querySelectorAll('a');
-                
-                games = [];
-                links.forEach(link => {
-                    let href = link.getAttribute('href');
-                    if (href && href.endsWith('/') && href !== '../' && href !== './') {
-                        let folderName = href.replace(/\//g, '');
-                        let displayName = folderName.replace(/[-_]/g, ' ');
-                        games.push({ name: displayName, folder: folderName });
-                    }
-                });
+                // Mencoba membaca file list.json (Jika sampeyan buat file list.json berisi array file html)
+                const response = await fetch(NETLIFY_BASE_URL + '/list.json');
+                if (response.ok) {
+                    games = await response.json();
+                } else {
+                    // Fallback alternatif jika membaca direktori diizinkan Netlify
+                    const dirResponse = await fetch(NETLIFY_BASE_URL + '/');
+                    const text = await dirResponse.text();
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(text, 'text/html');
+                    const links = doc.querySelectorAll('a');
+                    
+                    games = [];
+                    links.forEach(link => {
+                        let href = link.getAttribute('href');
+                        if (href && href.endsWith('.html')) {
+                            let fileName = href.replace('.html', '');
+                            let displayName = fileName.replace(/[-_]/g, ' ');
+                            games.push({ name: displayName, file: href });
+                        }
+                    });
+                }
 
                 if (games.length > 0) {
                     renderGames(games);
                     document.getElementById('searchGame').disabled = false;
-                    document.getElementById('searchGame').placeholder = `🔍 Search from ${games.length} offline games...`;
+                    document.getElementById('searchGame').placeholder = `🔍 Search from ${games.length} games...`;
                 } else {
-                    document.getElementById('gameGrid').innerHTML = `<div style="grid-column: 1/-1; text-align: center; color: var(--accent-neon);">No games found in directory.</div>`;
+                    document.getElementById('gameGrid').innerHTML = `<div style="grid-column: 1/-1; text-align: center; color: var(--accent-neon);">No games found. Please make sure list.json is uploaded.</div>`;
                 }
             } catch (error) {
-                document.getElementById('gameGrid').innerHTML = `<div style="grid-column: 1/-1; text-align: center; color: var(--accent-neon);">Failed to load game list. Please check connection.</div>`;
+                document.getElementById('gameGrid').innerHTML = `<div style="grid-column: 1/-1; text-align: center; color: var(--accent-neon);">Failed to load games list.</div>`;
             }
         }
 
@@ -134,7 +144,8 @@
                 const card = document.createElement('div');
                 card.className = 'game-card';
                 card.innerText = game.name;
-                card.onclick = () => launchGame(`${NETLIFY_BASE_URL}/${game.folder}/index.html`);
+                // Mengarah langsung ke file html di dalam folder offline Netlify (contoh: /offline/tetris.html)
+                card.onclick = () => launchGame(`${NETLIFY_BASE_URL}/${game.file}`);
                 grid.appendChild(card);
             });
         }
@@ -152,6 +163,7 @@
 
         fetchGameList();
 
+        // --- SISTEM JEDA IKLAN 1 MENIT (60.000 ms) ---
         window.addEventListener('load', () => {
             setTimeout(() => {
                 const socialBarScript = document.createElement('script');
@@ -171,7 +183,7 @@
                 nativeInvoke.src = "https://examinerashtrayquizmaster.com/11d12644b7837950f948d0a715595c44/invoke.js";
                 bannerContainer.appendChild(nativeInvoke);
 
-                console.log("The advertisement loads automatically after 1 minute.");
+                console.log("Iklan dimuat otomatis setelah 1 menit.");
             }, 60000); 
         });
     </script>
