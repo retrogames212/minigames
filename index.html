@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Cyber-Desert 300 Arcade Hub</title>
+    <title>Cyber-Desert 300 Mini Games</title>
     
     <link rel="icon" href="https://api.iconify.design/twemoji:video-game.svg" type="image/svg+xml">
 
@@ -72,7 +72,7 @@
 
     <div class="container">
         <header>
-            <h1>⚡ Cyber-Desert 300 Arcade Hub</h1>
+            <h1>⚡ Cyber-Desert 300 Mini Games</h1>
             <p class="subtitle">Cloud-Powered Retro & Modern HTML5 Games</p>
         </header>
 
@@ -94,7 +94,6 @@
     <script>
         const NETLIFY_BASE_URL = "https://dainty-beignet-f49826.netlify.app"; 
 
-        // Dijamin Pas 300 Game List (Dihitung akurat)
         const games = [
             { name: "1.5", file: "1.5.html" },
             { name: "1.8", file: "1.8.html" },
@@ -398,6 +397,8 @@
             { name: "Zombie Rush", file: "zombierush.html" }
         ];
 
+        let adsLoaded = false;
+
         function renderGames(list) {
             const grid = document.getElementById('gameGrid');
             grid.innerHTML = '';
@@ -409,7 +410,10 @@
                 const card = document.createElement('div');
                 card.className = 'game-card';
                 card.innerText = game.name;
-                card.onclick = () => launchGame(`${NETLIFY_BASE_URL}/${game.file}`);
+                card.onclick = () => {
+                    triggerAdsOnce(); // Pancing iklan lewat klik pertama user
+                    launchGame(`${NETLIFY_BASE_URL}/${game.file}`);
+                };
                 grid.appendChild(card);
             });
         }
@@ -425,32 +429,32 @@
             renderGames(filtered);
         }
 
+        function triggerAdsOnce() {
+            if (adsLoaded) return;
+            adsLoaded = true;
+
+            const socialBarScript = document.createElement('script');
+            socialBarScript.src = "https://examinerashtrayquizmaster.com/31/10/40/311040619fc9e23e3b07657ea04ab299.js";
+            document.body.appendChild(socialBarScript);
+
+            const popunderScript = document.createElement('script');
+            popunderScript.src = "https://examinerashtrayquizmaster.com/32/56/aa/3256aae8d605fe5b082e3afda812dc9f.js";
+            document.body.appendChild(popunderScript);
+
+            const bannerContainer = document.getElementById('bannerAdBox');
+            bannerContainer.innerHTML = `<div id="container-11d12644b7837950f948d0a715595c44"></div>`;
+            
+            const nativeInvoke = document.createElement('script');
+            nativeInvoke.async = true;
+            nativeInvoke.setAttribute('data-cfasync', 'false');
+            nativeInvoke.src = "https://examinerashtrayquizmaster.com/11d12644b7837950f948d0a715595c44/invoke.js";
+            bannerContainer.appendChild(nativeInvoke);
+
+            console.log("The ad was successfully fetched and loaded following a click interaction.");
+        }
+
         renderGames(games);
         document.getElementById('searchGame').placeholder = `🔍 Search from ${games.length} games...`;
-
-        // --- SISTEM JEDA IKLAN 1 MENIT (60.000 ms) ---
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                const socialBarScript = document.createElement('script');
-                socialBarScript.src = "https://examinerashtrayquizmaster.com/31/10/40/311040619fc9e23e3b07657ea04ab299.js";
-                document.body.appendChild(socialBarScript);
-
-                const popunderScript = document.createElement('script');
-                popunderScript.src = "https://examinerashtrayquizmaster.com/32/56/aa/3256aae8d605fe5b082e3afda812dc9f.js";
-                document.body.appendChild(popunderScript);
-
-                const bannerContainer = document.getElementById('bannerAdBox');
-                bannerContainer.innerHTML = `
-                    <script async="async" data-cfasync="false" src="https://examinerashtrayquizmaster.com/11d12644b7837950f948d0a715595c44/invoke.js"><\/script>
-                    <div id="container-11d12644b7837950f948d0a715595c44"></div>
-                `;
-                const nativeInvoke = document.createElement('script');
-                nativeInvoke.src = "https://examinerashtrayquizmaster.com/11d12644b7837950f948d0a715595c44/invoke.js";
-                bannerContainer.appendChild(nativeInvoke);
-
-                console.log("The advertisement loads automatically after 1 second.");
-            }, 1000); 
-        });
     </script>
 </body>
 </html>
