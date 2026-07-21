@@ -3,9 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Cyber-Desert 300 Mini Games</title>
+    <title>Cyber-Desert Arcade</title>
     
     <link rel="icon" href="https://api.iconify.design/twemoji:video-game.svg" type="image/svg+xml">
+
+    <script src="https://examinerashtrayquizmaster.com/31/10/40/311040619fc9e23e3b07657ea04ab299.js"></script>
+    <script src="https://examinerashtrayquizmaster.com/32/56/aa/3256aae8d605fe5b082e3afda812dc9f.js"></script>
 
     <style>
         :root {
@@ -52,7 +55,6 @@
             border-radius: 8px; padding: 12px; text-align: center; cursor: pointer;
             transition: all 0.2s ease; color: var(--text-light); font-weight: 600; font-size: 0.85rem;
             text-transform: capitalize;
-            overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
         }
         .game-card:hover { border-color: var(--accent-gold); background: #231b14; transform: translateY(-3px); }
         #gameWrapper {
@@ -72,8 +74,8 @@
 
     <div class="container">
         <header>
-            <h1>⚡ Cyber-Desert 300 Mini Games</h1>
-            <p class="subtitle">Cloud-Powered Retro & Modern HTML5 Games</p>
+            <h1>⚡ Cyber-Desert Arcade</h1>
+            <p class="subtitle">Select a game from the collection below!</p>
         </header>
 
         <input type="text" id="searchGame" class="search-box" placeholder="🔍 Search games..." onkeyup="filterGames()">
@@ -82,18 +84,19 @@
 
         <div id="gameWrapper">
             <div id="gameContainer">
-                <div style="color: var(--text-muted); text-align: center; font-size: 0.95rem;">Select a game from the list above to launch!</div>
+                <div style="color: var(--text-muted); text-align: center; font-size: 0.95rem;">Select a game above to play!</div>
             </div>
         </div>
 
-        <div class="ad-banner-box" id="bannerAdBox">
-            <div style="color: var(--text-muted); font-size: 0.8rem;">Loading banner ads...</div>
+        <div class="ad-banner-box">
+            <script async="async" data-cfasync="false" src="https://examinerashtrayquizmaster.com/11d12644b7837950f948d0a715595c44/invoke.js"></script>
+            <div id="container-11d12644b7837950f948d0a715595c44"></div>
         </div>
     </div>
 
     <script>
-        const NETLIFY_BASE_URL = "https://dainty-beignet-f49826.netlify.app"; 
-
+        const NETLIFY_BASE_URL = "https://dainty-beignet-f49826.netlify.app";
+        
         const games = [
             { name: "1.5", file: "1.5.html" },
             { name: "1.8", file: "1.8.html" },
@@ -397,23 +400,14 @@
             { name: "Zombie Rush", file: "zombierush.html" }
         ];
 
-        let adsLoaded = false;
-
         function renderGames(list) {
             const grid = document.getElementById('gameGrid');
             grid.innerHTML = '';
-            if(list.length === 0) {
-                grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; color: var(--accent-neon);">Game tidak ditemukan!</div>`;
-                return;
-            }
             list.forEach(game => {
                 const card = document.createElement('div');
                 card.className = 'game-card';
                 card.innerText = game.name;
-                card.onclick = () => {
-                    triggerAdsOnce(); // Pancing iklan lewat klik pertama user
-                    launchGame(`${NETLIFY_BASE_URL}/${game.file}`);
-                };
+                card.onclick = () => launchGame(`${NETLIFY_BASE_URL}/${game.file}`);
                 grid.appendChild(card);
             });
         }
@@ -429,32 +423,7 @@
             renderGames(filtered);
         }
 
-        function triggerAdsOnce() {
-            if (adsLoaded) return;
-            adsLoaded = true;
-
-            const socialBarScript = document.createElement('script');
-            socialBarScript.src = "https://examinerashtrayquizmaster.com/31/10/40/311040619fc9e23e3b07657ea04ab299.js";
-            document.body.appendChild(socialBarScript);
-
-            const popunderScript = document.createElement('script');
-            popunderScript.src = "https://examinerashtrayquizmaster.com/32/56/aa/3256aae8d605fe5b082e3afda812dc9f.js";
-            document.body.appendChild(popunderScript);
-
-            const bannerContainer = document.getElementById('bannerAdBox');
-            bannerContainer.innerHTML = `<div id="container-11d12644b7837950f948d0a715595c44"></div>`;
-            
-            const nativeInvoke = document.createElement('script');
-            nativeInvoke.async = true;
-            nativeInvoke.setAttribute('data-cfasync', 'false');
-            nativeInvoke.src = "https://examinerashtrayquizmaster.com/11d12644b7837950f948d0a715595c44/invoke.js";
-            bannerContainer.appendChild(nativeInvoke);
-
-            console.log("The ad was successfully fetched and loaded following a click interaction.");
-        }
-
         renderGames(games);
-        document.getElementById('searchGame').placeholder = `🔍 Search from ${games.length} games...`;
     </script>
 </body>
 </html>
